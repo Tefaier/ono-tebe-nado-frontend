@@ -15,4 +15,8 @@ export class OrderFinish extends Component<IOrderFinish> {
             this.actionElement.addEventListener('click', onClick);
         }
     }
+
+    set total(value: number) {
+        // no use
+    }
 }

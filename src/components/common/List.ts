@@ -1,22 +1,25 @@
+import { createElement } from "../../utils/utils";
 import { Component } from "../base/Component";
 
-export interface IListItem<T> {
-    item: {
-        render(state: T): HTMLElement
-    }
-    values: T
+export interface IListItems {
+    items: HTMLElement[]
 }
 
-export interface IListItems<T> {
-    items: IListItem<T>[]
-}
-
-export class ListView<K, T extends IListItems<K>> extends Component<T> {
-    set items(value: T) {
-        this.container.replaceChildren(...value.items.map(item => item.item.render(item.values)));
+export class ListView extends Component<IListItems> {
+    constructor(container: HTMLElement, protected textOnEmpty: string, protected elementToWrite?: HTMLElement) {
+        super(container);
+        this.elementToWrite = elementToWrite ?? container;
     }
 
-    render(state: T) {
+    set items(items: HTMLElement[]) {
+        if (items.length > 0) {
+            this.container.replaceChildren(...items);
+        } else {
+            this.container.replaceChildren(createElement<HTMLElement>('p', {textContent: this.textOnEmpty}));
+        }
+    }
+
+    render(state: IListItems) {
         super.render(state);
         return this.container;
     }

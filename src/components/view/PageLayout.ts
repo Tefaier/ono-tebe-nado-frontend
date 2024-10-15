@@ -7,7 +7,7 @@ import { CatalogItemStatus } from "./AuctionCards";
 interface IPageLayout {
     counter: number,
     locked: boolean,
-    catalog: IListItems<CatalogItemStatus>
+    catalog: IListItems
 }
 
 export class PageLayout extends Component<IPageLayout> {
@@ -15,7 +15,7 @@ export class PageLayout extends Component<IPageLayout> {
     protected basketCounter: HTMLElement;
     protected basketButton: HTMLElement;
     protected catalogHolder: HTMLElement;
-    protected catalogList: ListView<CatalogItemStatus, IListItems<CatalogItemStatus>>;
+    protected catalogList: ListView;
 
 
     constructor(container: HTMLElement, protected eventSystem: IEvents) {
@@ -25,7 +25,7 @@ export class PageLayout extends Component<IPageLayout> {
         this.basketCounter = ensureElement<HTMLElement>('.header__basket-counter');
         this.basketButton = ensureElement<HTMLElement>('.header__basket');
         this.catalogHolder = ensureElement<HTMLElement>('.catalog__items');
-        this.catalogList = new ListView(this.catalogHolder);
+        this.catalogList = new ListView(this.catalogHolder, 'Нет лотов');
 
         this.basketButton.addEventListener('click', () => {
             this.eventSystem.emit('bids:open');
@@ -36,7 +36,7 @@ export class PageLayout extends Component<IPageLayout> {
         this.setText(this.basketCounter, String(value));
     }
 
-    set catalog(items: IListItems<CatalogItemStatus>) {
+    set catalog(items: IListItems) {
         this.catalogList.render(items);
     }
 
