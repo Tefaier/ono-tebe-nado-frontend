@@ -26,7 +26,7 @@ export class Basket<T> extends ListView {
     }
 
     set selected(items: string[]) {
-        this.setDisabled(this.buttonElement, items.length > 0);
+        this.setDisabled(this.buttonElement, items.length == 0);
     }
 
     set total(total: number) {

@@ -13,9 +13,9 @@ export class ListView extends Component<IListItems> {
 
     set items(items: HTMLElement[]) {
         if (items.length > 0) {
-            this.container.replaceChildren(...items);
+            this.elementToWrite.replaceChildren(...items);
         } else {
-            this.container.replaceChildren(createElement<HTMLElement>('p', {textContent: this.textOnEmpty}));
+            this.elementToWrite.replaceChildren(createElement<HTMLElement>('p', {textContent: this.textOnEmpty}));
         }
     }
 

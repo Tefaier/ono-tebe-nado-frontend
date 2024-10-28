@@ -101,6 +101,7 @@ export class BidItem extends Card<BidItemStatus> {
 
         if (!this.buttonElement && onClick) {
             this.selectorElement?.addEventListener('change', onClick)
+            this.container.removeEventListener('click', onClick);
         }
     }
 
