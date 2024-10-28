@@ -141,8 +141,8 @@ export class AuctionItem extends Card<AuctionItemStatus> {
         this.labelElement = container.querySelector(`.${AuctionItem.baseClassName}__auction-text`);
         this.buttonElement = container.querySelector(`.button`);
         this.inputElement = container.querySelector(`.form__input`);
-        this.bidsElement = container.querySelector(`.history-bids`);
-        this.historyElement = container.querySelector(`.history`);
+        this.bidsElement = container.querySelector(`.${AuctionItem.baseClassName}__history-bids`);
+        this.historyElement = container.querySelector(`.${AuctionItem.baseClassName}__history`);
         this.formElement = container.querySelector(`.${AuctionItem.baseClassName}__bid`);
 
         this.formElement.addEventListener('submit', (event) => {

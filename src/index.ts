@@ -55,7 +55,7 @@ const order = new Order(cloneTemplate(orderTemplate), events);
 
 // Изменились элементы каталога
 events.on('items:changed', () => {
-    page.catalog.items = userStatus.lots.map(item => {
+    page.catalog = {items: userStatus.lots.map(item => {
         const card = new CatalogItem(cloneTemplate(cardCatalogTemplate), () => events.emit('card:select', item));
         return card.render({
             title: item.title,
@@ -66,7 +66,7 @@ events.on('items:changed', () => {
                 label: item.timeStatusText()
             },
         });
-    });
+    })}
 
     page.counter = userStatus.getLotsByStatus('closed', null, true).length;
 });
@@ -244,8 +244,7 @@ events.on('modal:close', () => {
 // Получаем лоты с сервера
 api.getLotList()
     .then(result => {
-        // вместо лога поместите данные в модель
-        console.log(result);
+        userStatus.setLots(result);
     })
     .catch(err => {
         console.error(err);
